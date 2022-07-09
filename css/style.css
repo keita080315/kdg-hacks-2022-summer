@@ -211,3 +211,15 @@ main{
     top: 0;
     left: 50%;
 }
+.calender {
+    position: absolute;
+    right: 10px;
+    padding: 10px;
+}
+.audio {
+    position: absolute;
+    max-height: 30px;
+    left: 10px;
+    padding: 10px;
+}
+
