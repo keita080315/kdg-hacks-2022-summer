@@ -12,12 +12,15 @@ const detection_options = {
 
 
 function setup() {
-    createCanvas(360, 270);
+    canvas = createCanvas(windowWidth, windowHeight); // canvasタグを生成
+    canvas.parent("p5-canvas-wrapper"); // index.htmlのp5-canvasの子要素にcanvasタグを持ってくる
+    canvas.style('height','100%');
+    canvas.style('width','auto');
 
     // load up your video
     video = createCapture(VIDEO);
     video.size(width, height);
-    // video.hide(); // Hide the video element, and just show the canvas
+    video.hide(); // Hide the video element, and just show the canvas
     faceapi = ml5.faceApi(video, detection_options, modelReady)
     textAlign(RIGHT);
 }
