@@ -46,8 +46,8 @@ function gotResults(err, result) {
   if (detections) {
     if (detections.length > 0) {
       // console.log(detections)
-      drawBox(detections);
-      drawLandmarks(detections);
+      // drawBox(detections);
+      // drawLandmarks(detections);
     }
   }
   faceapi.detect(gotResults);
