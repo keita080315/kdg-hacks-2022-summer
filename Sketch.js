@@ -1,6 +1,8 @@
 let faceapi;
 let video;
 let detections;
+let detections_list = [];
+let fukkin_ct = 0;
 
 // by default all options are set to true
 const detection_options = {
@@ -32,8 +34,10 @@ function gotResults(err, result) {
         console.log(err)
         return
     }
-    // console.log(result)
+    detect_fukkin(result)
+
     detections = result;
+
 
     // background(220);
     background(255);
@@ -104,4 +108,23 @@ function drawPart(feature, closed){
         endShape();
     }
     
+}
+
+function detect_fukkin(result){
+    detections_list.push(result);
+    if (result.length> 0) {
+        // 現フレーム顔あり
+        let i = 4; // 顔がない時の連続フレーム数
+        let fukkin = detections_list.slice(-i,detections_list.length-1).every(function(val){
+            return val == 0;
+        });
+        if (fukkin){
+            // 腹筋あり
+            console.log("腹筋あり");
+            fukkin_ct = fukkin_ct + 1;
+        }
+
+    }else{
+        // 現フレーム顔なし
+    }
 }
