@@ -1,0 +1,134 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+main{
+    width: 100%;
+    height: 100vh;
+    text-align: center;
+    margin: 0 auto;
+    background-color: #eee7e0;
+    color: #f9f9f9;
+    overflow-y: hidden;
+    position: relative;
+}
+.video-wrap{
+    margin: 0 auto;
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+video{
+    width: 90%;
+    border-radius: 40px;
+    border: 10px solid  #00608d;
+    margin: 50px 0;
+}
+.time-wrap{
+    position: absolute;
+    top: 10%;
+    right: 5%;
+    font-weight: bold;
+    font-size: 40px;
+    border: 8px solid #fff;
+    padding: 0px 20px;
+}
+.count-wrap{
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-weight: bold;
+    font-size: 300px;
+}
+.start-button{
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    width: 600px;
+    height: 320px;
+    background-color: #000;
+    opacity: 0.8;
+    font-family: Arial;
+}
+.start-button h1{
+    font-size: 120px;
+    font-weight: bold;
+}
+.start-button button{
+    font-size: 40px;
+    border: 8px solid #fff;
+    color: black;
+    font-weight: bold;
+    margin-top: 10px;
+    cursor: pointer;
+}
+.start-button.start{
+    display: none;
+}
+.start-button img{
+    position: absolute;
+    left: 100%;
+    top: 40%;
+    width: 600px;
+}
+.sub-wrap{
+    display: none;
+}
+.sub-wrap.start{
+    display: block;
+}
+.end-wrap{
+    display: none;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    width: 600px;
+    height: 320px;
+    background-color: #000;
+    opacity: 0.8;
+    font-family: Arial;
+}
+.end-wrap h1{
+    font-size: 120px;
+    font-weight: bold;
+    margin-top: 80px;
+}
+.end-wrap p{
+    font-size: 40px;
+    font-weight: bold;
+    margin-bottom: 80px;
+}
+.end-wrap a{
+    font-size: 30px;
+    border: 8px solid #fff;
+    color: black;
+    font-weight: bold;
+    padding: 5px 25px;
+    cursor: pointer;
+    background-color: #fff;
+    text-decoration: none;
+}
+.timer.start{
+    display: block;
+}
+.timer.end{
+    display: none;
+}
+.timer{
+    display: none;
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    z-index: 100;
+    transform: translateX(-50%);
+    font-weight: bold;
+    font-size: 300px;
+}
+.end-wrap.end{
+    display: block;
+}
