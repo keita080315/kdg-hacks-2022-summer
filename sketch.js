@@ -12,8 +12,10 @@ const detection_options = {
 
 
 function setup() {
-    canvas = createCanvas(360, 270); // canvasタグを生成
-    canvas.parent("p5-canvas"); // index.htmlのp5-canvasの子要素にcanvasタグを持ってくる
+    canvas = createCanvas(windowWidth, windowHeight); // canvasタグを生成
+    canvas.parent("p5-canvas-wrapper"); // index.htmlのp5-canvasの子要素にcanvasタグを持ってくる
+    canvas.style('height','100%');
+    canvas.style('width','auto');
 
     // load up your video
     video = createCapture(VIDEO);
