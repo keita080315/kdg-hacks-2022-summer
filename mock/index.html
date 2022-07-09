@@ -25,18 +25,20 @@
         <p id="timer">3</p>
     </div>
     <div class="video-wrap">
+        <div class="orange" id="orange"></div>
+        <img class="wave-wrap" id="wave-wrap" src="img/wave.svg">
         <video id="video"></video>
         <div class="sub-wrap" id="sub-wrap">
             <div class="count-wrap">
                 <p>0</p>
             </div>
             <div class="time-wrap">
-                <p>残り時間：<span id="timer2">30</span>秒</p>
+                <p>Time<br><span id="timer2">30</span></p>
             </div>
         </div>
     </div>
     <div id="end-wrap" class="end-wrap">
-        <h1>End!</h1>
+        <h1>Time Up!</h1>
         <p>Your score: 1</p>
         <a href="index.html">ホームに戻る</a>
     </div>
@@ -53,6 +55,8 @@
         window.setTimeout(function(){
             count_wrap.classList.add("end");
             sub_wrap.classList.add("start");
+            document.getElementById("wave-wrap").classList.add("start")
+            document.getElementById("orange").style.display = "none"
         }, 3000);
 
         window.setTimeout(function(){
