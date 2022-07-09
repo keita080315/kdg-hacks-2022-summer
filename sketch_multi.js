@@ -9,6 +9,7 @@ let detections_list_me = [];
 let fukkin_ct_me = 0;
 let detections_list_you = [];
 let fukkin_ct_you = 0;
+var conn;
 
 // by default all options are set to true
 const detection_options = {
@@ -43,6 +44,8 @@ function setup() {
   // 送信ボタンの生成
   createButton("Call").mousePressed(() => {
     // ボタンが押されたら
+    fukkin_ct_me = 0;
+    fukkin_ct_you = 0;
     const callId = idInput.value(); //id入力欄の値を取得
     console.log("call! id=" + peer.id);
     const call = peer.call(callId, capture.elt.srcObject); //id先を呼び出し
@@ -51,11 +54,34 @@ function setup() {
 
   // // 相手から呼び出された実行される
   peer.on("call", (call) => {
+    fukkin_ct_me = 0;
+    fukkin_ct_you = 0;
     console.log("be called!");
     call.answer(capture.elt.srcObject); //呼び出し相手に対して返す
     addVideo(call);
   });
+  // 相手からデータ通信の接続要求イベントが来た場合、このconnectionイベントが呼ばれる
+  // - 渡されるconnectionオブジェクトを操作することで、データ通信が可能
+  peer.on("connection", function (connection) {
+    // データ通信用に connectionオブジェクトを保存しておく
+    conn = connection;
 
+    // 接続が完了した場合のイベントの設定
+    // conn.on("open", function() {
+    //     // 相手のIDを表示する
+    //     // - 相手のIDはconnectionオブジェクトのidプロパティに存在する
+    //     $("#peer-id").text(conn.id);
+    // });
+
+    // メッセージ受信イベントの設定
+    conn.on("data", onRecvMessage);
+  });
+
+  function onRecvMessage(data) {
+    // 画面に受信したメッセージを表示
+    console.log("受け取り回数" + data);
+    //$("#messages").append($("<p>").text(conn.id + ": " + data).css("font-weight", "bold"));
+  }
   // 相手の映像を追加処理
   function addVideo(call) {
     call.on("stream", (theirStream) => {
@@ -279,6 +305,8 @@ function detect_fukkin_you(result) {
       // 腹筋あり
       fukkin_ct_you = fukkin_ct_you + 1;
       console.log("相手" + fukkin_ct_you + "回目");
+      // 送信
+      // conn.send(fukkin_ct_you);
     }
   } else {
     // 現フレーム顔なし
