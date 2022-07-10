@@ -134,6 +134,7 @@ document.getElementById("start-button").onclick = function () {
   var end_wrap = document.getElementById("end-wrap");
   var count_wrap = document.getElementById("timer-wrap");
   count_wrap.classList.add("start");
+  document.getElementById("btn-change-mode").style.display = "none";
 
   window.setTimeout(function () {
     count_wrap.classList.add("end");

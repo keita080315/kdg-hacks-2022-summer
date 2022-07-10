@@ -222,4 +222,28 @@ main{
     left: 10px;
     padding: 10px;
 }
-
+.btn-change-mode {
+    position: absolute;
+    top: 65%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    /* width: 600px;
+    height: 320px; */
+    /* background-color: #000; */
+    opacity: 0.8;
+    font-family: Arial;
+}
+.btn-change-mode a{
+    font-size: 30px;
+    border: 8px solid #fff;
+    color: black;
+    font-weight: bold;
+    padding: 5px 25px;
+    cursor: pointer;
+    background-color: #fff;
+    text-decoration: none;
+}
+.end-wrap.end{
+    display: block;
+}

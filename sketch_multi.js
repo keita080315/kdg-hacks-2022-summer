@@ -329,6 +329,7 @@ document.getElementById("start-button").onclick = function () {
   count_wrap.classList.add("start");
   document.getElementsByTagName("body")[0].getElementsByTagName("button")[1].style.display = "none"
   document.getElementsByTagName("body")[0].getElementsByTagName("input")[0].style.display = "none"
+  document.getElementById("btn-change-mode").style.display = "none";
 
   window.setTimeout(function () {
     count_wrap.classList.add("end");
