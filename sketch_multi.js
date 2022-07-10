@@ -288,7 +288,8 @@ function detect_fukkin_me(result) {
       fukkin_ct_me = fukkin_ct_me + 1;
       console.log("私" + fukkin_ct_me + "回目");
       document.querySelector('#fukkin-me-ct').textContent = fukkin_ct_me;
-      document.hanabi_1.src = "img/hanabi_orange.svg";
+      document.hanabi_1.src = "img/hanabi_pinkBig.svg";
+      document.hanabi_5.src = "img/hanabi_pink.svg";
       document.querySelector('#score').textContent = score_end;
     }
   } else {
@@ -312,6 +313,7 @@ function detect_fukkin_you(result) {
       console.log("相手" + fukkin_ct_you + "回目");
       document.querySelector('#fukkin-you-ct').textContent = fukkin_ct_you;
       document.hanabi_2.src = "img/hanabi_orange.svg";
+      document.hanabi_4.src = "img/hanabi_pink.svg";
       // 送信
       // conn.send(fukkin_ct_you);
     }
@@ -346,11 +348,11 @@ document.getElementById("start-button").onclick = function () {
       document.hanabi_2.src = "img/hanabi_orange.svg";
       document.hanabi_1.src = "img/hanabi_orange.svg";
     }
-     else if(fukkin_ct_me == fukkin_ct_you){
+     else if(fukkin_ct_me === fukkin_ct_you){
       document.getElementById("result_comment").textContent = "Draw!";
     }
      else{
-      document.getElementById("result_comment").textContent = "You Lose,,";
+      document.getElementById("result_comment").textContent = "You Lose..";
     }
   }, 30000);
 };
