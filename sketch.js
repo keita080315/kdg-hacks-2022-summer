@@ -4,6 +4,7 @@ let detections;
 let detections_list = [];
 let fukkin_ct = 0;
 let score_end;
+let start_check = false;
 
 // by default all options are set to true
 const detection_options = {
@@ -115,7 +116,7 @@ function detect_fukkin(result) {
       .every(function (val) {
         return val == 0;
       });
-    if (fukkin) {
+    if (fukkin && start_check) {
       // 腹筋あり
       console.log("腹筋あり");
       fukkin_ct = fukkin_ct + 1;
@@ -125,6 +126,8 @@ function detect_fukkin(result) {
       document.hanabi_3.src = "img/hanabi_orangeBig.svg";
       document.hanabi_2.src = "img/hanabi_orangeBig.svg";
       document.hanabi_1.src = "img/hanabi_orangeBig.svg";
+      document.getElementById("audioElement").currentTime = 0;
+      document.getElementById("audioElement").play();
       document.querySelector("#score").textContent = score_end;
     }
   } else {
@@ -133,11 +136,13 @@ function detect_fukkin(result) {
 }
 
 document.getElementById("start-button").onclick = function () {
+  start_check = true;
   this.classList.toggle("start");
   var sub_wrap = document.getElementById("sub-wrap");
   var end_wrap = document.getElementById("end-wrap");
   var count_wrap = document.getElementById("timer-wrap");
   count_wrap.classList.add("start");
+  document.getElementById("btn-change-mode").style.display = "none";
 
   window.setTimeout(function () {
     count_wrap.classList.add("end");
@@ -150,7 +155,9 @@ document.getElementById("start-button").onclick = function () {
     sub_wrap.classList.remove("start");
     end_wrap.classList.add("end");
     score_end = fukkin_ct;
-  }, 30000);
+    document.querySelector("#score").textContent = score_end;
+    start_check = false;
+  }, 33000);
 };
 
 window.onload = function () {
@@ -166,7 +173,7 @@ window.onload = function () {
       }, 1000);
 
       e.preventDefault();
-      var count2 = 30;
+      var count2 = 33;
       var id2 = setInterval(function () {
         count2--;
         document.querySelector("#timer2").textContent = count2;
