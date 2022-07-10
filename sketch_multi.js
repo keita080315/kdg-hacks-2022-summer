@@ -11,6 +11,7 @@ let detections_list_you = [];
 let fukkin_ct_you = 0;
 var conn;
 let score_end;
+let start_check = false;
 
 // by default all options are set to true
 const detection_options = {
@@ -283,13 +284,15 @@ function detect_fukkin_me(result) {
       .every(function (val) {
         return val == 0;
       });
-    if (fukkin) {
+    if (fukkin && start_check) {
       // 腹筋あり
       fukkin_ct_me = fukkin_ct_me + 1;
       console.log("私" + fukkin_ct_me + "回目");
-      document.querySelector('#fukkin-me-ct').textContent = fukkin_ct_me;
+      document.querySelector("#fukkin-me-ct").textContent = fukkin_ct_me;
       document.hanabi_1.src = "img/hanabi_orange.svg";
-      document.querySelector('#score').textContent = score_end;
+      document.getElementById("audioElement").currentTime = 0;
+      document.getElementById("audioElement").play();
+      document.querySelector("#score").textContent = score_end;
     }
   } else {
     // 現フレーム顔なし
@@ -306,11 +309,11 @@ function detect_fukkin_you(result) {
       .every(function (val) {
         return val == 0;
       });
-    if (fukkin) {
+    if (fukkin && start_check) {
       // 腹筋あり
       fukkin_ct_you = fukkin_ct_you + 1;
       console.log("相手" + fukkin_ct_you + "回目");
-      document.querySelector('#fukkin-you-ct').textContent = fukkin_ct_you;
+      document.querySelector("#fukkin-you-ct").textContent = fukkin_ct_you;
       document.hanabi_2.src = "img/hanabi_orange.svg";
       // 送信
       // conn.send(fukkin_ct_you);
@@ -320,60 +323,64 @@ function detect_fukkin_you(result) {
   }
 }
 
-
 document.getElementById("start-button").onclick = function () {
+  start_check = true;
   this.classList.toggle("start");
   var sub_wrap = document.getElementById("sub-wrap");
   var end_wrap = document.getElementById("end-wrap");
-  var count_wrap = document.getElementById("timer-wrap")
+  var count_wrap = document.getElementById("timer-wrap");
   count_wrap.classList.add("start");
-  document.getElementsByTagName("body")[0].getElementsByTagName("button")[1].style.display = "none"
-  document.getElementsByTagName("body")[0].getElementsByTagName("input")[0].style.display = "none"
+  document
+    .getElementsByTagName("body")[0]
+    .getElementsByTagName("button")[1].style.display = "none";
+  document
+    .getElementsByTagName("body")[0]
+    .getElementsByTagName("input")[0].style.display = "none";
   document.getElementById("btn-change-mode").style.display = "none";
 
   window.setTimeout(function () {
     count_wrap.classList.add("end");
     sub_wrap.classList.add("start");
-    document.getElementById("wave-wrap").classList.add("start")
-    document.getElementById("orange").style.display = "none"
+    document.getElementById("wave-wrap").classList.add("start");
+    document.getElementById("orange").style.display = "none";
   }, 3000);
 
   window.setTimeout(function () {
     sub_wrap.classList.remove("start");
     end_wrap.classList.add("end");
     score_end = fukkin_ct_me;
-    if(fukkin_ct_me > fukkin_ct_you){
+    document.querySelector("#score").textContent = score_end;
+    start_check = false;
+    if (fukkin_ct_me > fukkin_ct_you) {
       document.getElementById("result_comment").textContent = "You Win!";
       document.hanabi_2.src = "img/hanabi_orange.svg";
       document.hanabi_1.src = "img/hanabi_orange.svg";
-    }
-     else if(fukkin_ct_me == fukkin_ct_you){
+    } else if (fukkin_ct_me == fukkin_ct_you) {
       document.getElementById("result_comment").textContent = "Draw!";
-    }
-     else{
+    } else {
       document.getElementById("result_comment").textContent = "You Lose,,";
     }
-  }, 30000);
+  }, 33000);
 };
 
 window.onload = function () {
-  document.querySelector('#start-button').addEventListener('click', function (e) {
-    e.preventDefault();
-    var count = 3;
-    var id = setInterval(function () {
-      count--;
-      document.querySelector('#timer').textContent = count;
-      if (count <= 1) clearInterval(id);
-    }, 1000);
+  document
+    .querySelector("#start-button")
+    .addEventListener("click", function (e) {
+      e.preventDefault();
+      var count = 3;
+      var id = setInterval(function () {
+        count--;
+        document.querySelector("#timer").textContent = count;
+        if (count <= 1) clearInterval(id);
+      }, 1000);
 
-    e.preventDefault();
-    var count2 = 30;
-    var id2 = setInterval(function () {
-      count2--;
-      document.querySelector('#timer2').textContent = count2;
-      if (count <= 1) clearInterval(id);
-    }, 1000);
-  });
-
-}
-
+      e.preventDefault();
+      var count2 = 33;
+      var id2 = setInterval(function () {
+        count2--;
+        document.querySelector("#timer2").textContent = count2;
+        if (count <= 1) clearInterval(id);
+      }, 1000);
+    });
+};
