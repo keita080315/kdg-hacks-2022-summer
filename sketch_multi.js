@@ -290,8 +290,8 @@ function detect_fukkin_me(result) {
       console.log("私" + fukkin_ct_me + "回目");
       document.querySelector("#fukkin-me-ct").textContent = fukkin_ct_me;
       document.hanabi_1.src = "img/hanabi_orange.svg";
-      document.getElementById("audioElement").currentTime = 0;
-      document.getElementById("audioElement").play();
+      document.getElementById("audioElement_hanabi").currentTime = 0;
+      document.getElementById("audioElement_hanabi").play();
       document.querySelector("#score").textContent = score_end;
     }
   } else {
@@ -324,7 +324,12 @@ function detect_fukkin_you(result) {
 }
 
 document.getElementById("start-button").onclick = function () {
+  document.getElementById("audioElement_start").currentTime = 0;
+  document.getElementById("audioElement_start").play();
   start_check = true;
+  document.getElementById("audioElement_battle").volume = 0.05;
+  document.getElementById("audioElement_battle").currentTime = 0;
+  document.getElementById("audioElement_battle").play();
   this.classList.toggle("start");
   var sub_wrap = document.getElementById("sub-wrap");
   var end_wrap = document.getElementById("end-wrap");
@@ -345,19 +350,31 @@ document.getElementById("start-button").onclick = function () {
     document.getElementById("orange").style.display = "none";
   }, 3000);
 
-  window.setTimeout(function () {
+  window.setTimeout(async function () {
+    // 3秒待機
+    const sleep = (waitTime) =>
+      new Promise((resolve) => setTimeout(resolve, waitTime));
+    document.getElementById("audioElement_battle").pause();
+    document.getElementById("audioElement_finish").currentTime = 0;
+    document.getElementById("audioElement_finish").play();
     sub_wrap.classList.remove("start");
     end_wrap.classList.add("end");
     score_end = fukkin_ct_me;
     document.querySelector("#score").textContent = score_end;
     start_check = false;
+
+    await sleep(3000);
     if (fukkin_ct_me > fukkin_ct_you) {
+      document.getElementById("audioElement_win").currentTime = 0;
+      document.getElementById("audioElement_win").play();
       document.getElementById("result_comment").textContent = "You Win!";
       document.hanabi_2.src = "img/hanabi_orange.svg";
       document.hanabi_1.src = "img/hanabi_orange.svg";
     } else if (fukkin_ct_me == fukkin_ct_you) {
       document.getElementById("result_comment").textContent = "Draw!";
     } else {
+      document.getElementById("audioElement_lose").currentTime = 0;
+      document.getElementById("audioElement_lose").play();
       document.getElementById("result_comment").textContent = "You Lose,,";
     }
   }, 33000);
