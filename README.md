@@ -1,5 +1,3 @@
-# 2022-summer-c-team
-
 # さまっする（SUMMER x MUSCLE）
 ![](sama.png)
 
